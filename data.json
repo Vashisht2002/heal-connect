@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Dr. Naresh Trehan",
+        "specialization": "Cardiac Surgery, Cardiac Care (Cardiology)",
+        "hospital": "Medanta, Gurugram",
+        "contact": "+91 7889242342",
+        "experience": "40 years",
+        "fee": 1500,
+        "image": "doc1.1.jpeg"
+    },
+
+    {
+        "id": 2,
+        "name": "Dr. R.R. Mantri",
+        "specialization": "DNB(Cardiology), DM-Cardiology",
+        "hospital": "Fortis Hospital, Mumbai",
+        "experience": "42 years",
+        "contact": "+91 8765432109",
+        "fee": "1200",
+        "image": "doc2.jpeg"
+    },
+    {
+        "id": 3,
+        "name": "Dr. Ashok Seth",
+        "specialization": "Cardiac Sciences, Interventional Cardiology",
+        "hospital": "Apollo Hospital, Chennai",
+        "experience": "40 years",
+        "contact": "+91 9988543532",
+        "fee": "1400",
+        "image": "AshokF.jpeg"
+    },
+
+    {
+        "id": 4,
+        "name": "Dr. Ganesh Kumar Mani",
+        "specialization": "Cardiac Sciences, Cardiac Surgery (Cardiology)",
+        "hospital": "Apollo Hospital, Chennai",
+        "experience": "46 + years",
+        "contact": "+91 9983242344",
+        "fee": "1600",
+        "image": "Ganesh.jpeg"
+    }
+]

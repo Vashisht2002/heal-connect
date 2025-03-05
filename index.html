@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heal & Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Bootstrap Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                HEAL & CONNECT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Journals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <!-- Updated Search Form -->
+                <form id="searchForm" class="d-flex ms-3" onsubmit="redirectToSearchPage(event)">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </form>
+                <div class="ms-3">
+                    <a href="#"><i class="fab fa-facebook fa-lg me-2"></i></a>
+                    <a href="#"><i class="fab fa-twitter fa-lg me-2"></i></a>
+                    <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2><i>Empowering wellness,fostering connections</i> <br>Start your healing journey today!</h2>
+            
+            <p>Navigating a new country can be challenging, but we make it easy . Our platform connects you with trusted professionals, making it easy to search,compare and book appointments-tailored to your needs.Need an insurance,visa assistance,hotel bookings or translation services ? we got it all. Let us handle the details while you focus on your journey with confidence</p>
+            <button class="btn btn-primary">Join Now</button>
+        </div>
+        <div class="hero-image">
+            <img src="Doctors-consultation-750x400-removebg-preview.png" alt="Healthcare Professional" class="hero-image">
+        </div>
+    </section>
+
+    <script>
+        function redirectToSearchPage(event) {
+            event.preventDefault(); // Prevent default form submission
+            const query = document.getElementById('searchInput').value.trim();  
+            if (query) {
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`; 
+            }
+        }
+    </script>
+
+    <!-- Bootstrap JS (Required for Navbar Toggle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

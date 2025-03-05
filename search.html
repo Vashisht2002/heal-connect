@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Heal & Connect</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .navbar-search {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-search input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .navbar-search button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 70%;
+            max-width: 600px;
+            height: auto;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        .modal-title {
+            color: #007bff;
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: #007bff;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #0056b3;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+
+        .premium-text {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 2.0em;
+            text-align: center;
+
+        }
+        .modal-body ul{
+            text-align: left;
+            padding-left: 20px;
+            list-style-type: disc;
+            width: 100%;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .modal-body p{
+            color: black;
+            font-size: 1.9em;
+            margin-bottom: 15px;
+            font-weight: bolder;
+        }
+        
+
+        .modal-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            margin-top: 5%;
+        }
+
+        .modal-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Search Results Styles */
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .search-results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .search-results {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .doctor-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doctor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #007bff;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .doctor-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid #007bff;
+        }
+
+        .doctor-card h5 {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .doctor-card .call-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .doctor-card .call-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal Overlay -->
+    <div id="welcomeModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Welcome to Heal & Connect</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                
+                <h4 class="premium-text"> A PREMIUM PACKAGE AWAITS YOU!</h4>
+                <p>Included Benefits-</p>
+                <ul>
+                    <li>Budget Hotel Bookings</li>
+                    <li>Transportation</li>
+                    <li>Post-Treatment Care</li>
+                    <li>Visa Assistance</li>
+                    <li>Insurance Coverage</li>
+                    <li>Translators(if needed)</li>
+                </ul>
+                <button class="modal-btn" onclick="closeModal()">Get Started</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">HEAL & CONNECT</div>
+        
+    </nav>
+
+    <!-- Search Results Section -->
+    <div class="search-container">
+        <h3>Search Results for: <span id="searchQuery"></span></h3>
+        <div id="searchResults" class="search-results"></div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal() {
+            document.getElementById('welcomeModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('welcomeModal').style.display = 'none';
+        }
+
+        // Navigation search functionality
+        function performNavSearch() {
+            const query = document.getElementById('navSearchInput').value;
+            if (query) {
+                window.location.href = `search-results.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+
+        // Page load event
+        document.addEventListener("DOMContentLoaded", function () {
+            // Delay modal opening by 3 seconds
+            setTimeout(openModal, 3000);
+
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+
+            const query = getQueryParam("q");
+            document.getElementById("searchQuery").textContent = query;
+
+            if (query) {
+                fetch("data.json")
+                    .then(response => response.json())  
+                    .then(data => {
+                        console.log("Doctor Data:", data);
+                        
+                        // Filtering doctors based on the query
+                        const results = data.filter(doctor =>
+                            doctor.specialization.toLowerCase().includes(query.toLowerCase()) ||
+                            doctor.name.toLowerCase().includes(query.toLowerCase())
+                        );
+
+                        console.log("Filtered Results:", results);
+                        
+                        displayResults(results);
+                    })
+                    .catch(error => console.error("Error fetching doctor data:", error));
+            }
+        });
+
+        function displayResults(results) {
+            const resultsContainer = document.getElementById("searchResults");
+            resultsContainer.innerHTML = "";
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML = "<p>No doctors found.</p>";
+                return;
+            }
+
+            results.forEach(doctor => {
+                // Add a check to ensure fee exists and provide a fallback
+                const fee = doctor.fee !== undefined ? `₹ ${doctor.fee}` : 'Not specified';
+
+                const card = `
+                    <div class="doctor-card">
+                        <img src="${doctor.image}" alt="${doctor.name}">
+                        <h5>${doctor.name}</h5>
+                        <p><strong>Consultation Fee:</strong> ${fee}</p>
+                        <p><strong>Specialization:</strong> ${doctor.specialization}</p>
+                        <p><strong>Hospital:</strong> ${doctor.hospital}</p>
+                        <p><strong>Experience:</strong> ${doctor.experience}</p>
+                        
+                        ${doctor.contact ? `<p><strong>Contact:</strong> ${doctor.contact}</p>
+                        <a href="tel:${doctor.contact}" class="call-btn">Call Now</a>` : ''}
+                    </div>
+                `;
+                resultsContainer.innerHTML += card;
+            });
+        }
+    </script>
+</body>
+</html>
