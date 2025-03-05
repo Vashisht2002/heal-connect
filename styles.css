@@ -97,7 +97,7 @@ body {
 }
 
 .hero h2 {
-    font-size: 80px;
+    font-size: 6rem;
     white-space: nowrap;
     text-align: center;
     font-weight: 600;
@@ -106,7 +106,7 @@ body {
 
 .hero p {
     margin: 15px 0;
-    font-size: 40px;
+    font-size: 4rem;
 }
 
 .hero .btn {
